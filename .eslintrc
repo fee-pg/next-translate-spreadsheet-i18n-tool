@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "oclif",
+    "oclif-typescript"
+  ],
+  "rules": {
+    "unicorn/no-array-reduce": "off",
+    "unicorn/no-array-for-each": "off",
+    "unicorn/no-for-loop": "off",
+    "unicorn/prefer-module": "off",
+    "unicorn/filename-case": "off",
+    "camelcase": "off"
+  }
+}
