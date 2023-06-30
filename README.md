@@ -15,12 +15,10 @@ a next-translate's tool for google spreadsheet, it can flatten 2D locale-key arr
 <!-- usage -->
 ```sh-session
 $ npm install -g @uppo/next-translate-spreadsheet-i18n-tool
-or
-$ yarn add -g @uppo/next-translate-spreadsheet-i18n-tool
 $ ntsit COMMAND
 running command...
 $ ntsit (--version)
-@uppo/next-translate-spreadsheet-i18n-tool/1.0.0 darwin-x64 node-v16.14.2
+@uppo/next-translate-spreadsheet-i18n-tool/1.1.0 darwin-x64 node-v16.14.2
 $ ntsit --help [COMMAND]
 USAGE
   $ ntsit COMMAND
@@ -56,7 +54,7 @@ EXAMPLES
   $ ntsit gen 1sdfU3AZuFPzP_sDeDdpwa21S0BcH-ETVwNViuU9GqlB 3 C1 B3(./src/commands/gen/index.ts)
 ```
 
-_See code: [dist/commands/gen/index.ts](https://github.com/fee-pg/next-translate-spreadsheet-i18n-tool/blob/v1.0.0/dist/commands/gen/index.ts)_
+_See code: [dist/commands/gen/index.ts](https://github.com/fee-pg/next-translate-spreadsheet-i18n-tool/blob/v1.1.0/dist/commands/gen/index.ts)_
 
 ## `ntsit help [COMMANDS]`
 
