@@ -4,10 +4,6 @@ import main from '../../runs/gen'
 export default class Gen extends Command {
   static description = 'Start generating your files';
 
-  static examples = [
-    '$ ntsit gen 1sdfU3AZuFPzP_sDeDdpwa21S0BcH-ETVwNViuU9GqlB 3 C1 B3(./src/commands/gen/index.ts)',
-  ];
-
   static parsedWorkSheets = (input: string): number[] => {
     if (input.includes(',')) return input.split(',').map(item => Number.parseInt(item, 10))
     return Array.from({length: Number.parseInt(input, 10)}, (_, i) => i)
