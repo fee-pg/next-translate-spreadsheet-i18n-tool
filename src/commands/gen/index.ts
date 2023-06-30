@@ -1,4 +1,4 @@
-import {Args, Command} from '@oclif/core'
+import {Command, ux} from '@oclif/core'
 import main from '../../runs/gen'
 
 export default class Gen extends Command {
@@ -7,29 +7,6 @@ export default class Gen extends Command {
   static examples = [
     '$ ntsit gen 1sdfU3AZuFPzP_sDeDdpwa21S0BcH-ETVwNViuU9GqlB 3 C1 B3(./src/commands/gen/index.ts)',
   ];
-
-  static args = {
-    sheetId: Args.string({
-      description: 'google spreadsheet id',
-      required: true,
-    }),
-    workSheets: Args.string({
-      description: 'google spreadsheet worksheet id',
-      required: true,
-      // parse: input => {
-      //   if (input.includes(',')) return input.split(',').map(item => Number.parseInt(item, 10))
-      //   return Array.from({length: Number.parseInt(input, 10)}, (_, i) => i)
-      // },
-    }),
-    hStartCell: Args.string({
-      description: 'horizontal start cell. e.g. C1',
-      required: true,
-    }),
-    vStartCell: Args.string({
-      description: 'vertical start cell. e.g. B3',
-      required: true,
-    }),
-  };
 
   static parsedWorkSheets = (input: string): number[] => {
     if (input.includes(',')) return input.split(',').map(item => Number.parseInt(item, 10))
@@ -52,9 +29,18 @@ export default class Gen extends Command {
   }
 
   async run(): Promise<void> {
-    const {args} = await this.parse(Gen)
-    const {sheetId, workSheets, hStartCell, vStartCell} = args
+    const sheetId = await ux.prompt('google spreadsheet id?')
+    const workSheets = await ux.prompt('google spreadsheet worksheet id? count or indexs(e.g. 3 or 0,1,2)')
+    const hStartCell = await ux.prompt('horizontal start cell?(e.g. C1)')
+    const vStartCell = await ux.prompt('vertical start cell?(e.g. B3)')
+    const credentialsPath = await ux.prompt('google credentials path? based on the current directory, use relative path')
 
-    await main(sheetId, Gen.parsedWorkSheets(workSheets), Gen.parsedCell(hStartCell), Gen.parsedCell(vStartCell))
+    await main({
+      sheetId,
+      sheetIndexs: Gen.parsedWorkSheets(workSheets),
+      hStartCell: Gen.parsedCell(hStartCell),
+      vStartCell: Gen.parsedCell(vStartCell),
+      credentialsPath,
+    })
   }
 }

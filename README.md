@@ -9,11 +9,14 @@ a next-translate's tool for google spreadsheet, it can flatten 2D locale-key arr
 <!-- toc -->
 * [Usage](#usage)
 * [Commands](#commands)
+* [Todos](#todos)
 <!-- tocstop -->
 # Usage
 <!-- usage -->
 ```sh-session
 $ npm install -g @uppo/next-translate-spreadsheet-i18n-tool
+or
+$ yarn add -g @uppo/next-translate-spreadsheet-i18n-tool
 $ ntsit COMMAND
 running command...
 $ ntsit (--version)
@@ -26,7 +29,7 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`ntsit gen SHEETID WORKSHEETS HSTARTCELL VSTARTCELL`](#ntsit-gen-sheetid-worksheets-hstartcell-vstartcell)
+* [`ntsit gen`](#ntsit-gen)
 * [`ntsit help [COMMANDS]`](#ntsit-help-commands)
 * [`ntsit plugins`](#ntsit-plugins)
 * [`ntsit plugins:install PLUGIN...`](#ntsit-pluginsinstall-plugin)
@@ -38,19 +41,13 @@ USAGE
 * [`ntsit plugins:uninstall PLUGIN...`](#ntsit-pluginsuninstall-plugin-2)
 * [`ntsit plugins update`](#ntsit-plugins-update)
 
-## `ntsit gen SHEETID WORKSHEETS HSTARTCELL VSTARTCELL`
+## `ntsit gen`
 
 Start generating your files
 
 ```
 USAGE
-  $ ntsit gen SHEETID WORKSHEETS HSTARTCELL VSTARTCELL
-
-ARGUMENTS
-  SHEETID     google spreadsheet id
-  WORKSHEETS  google spreadsheet worksheet id
-  HSTARTCELL  horizontal start cell. e.g. C1
-  VSTARTCELL  vertical start cell. e.g. B3
+  $ ntsit gen
 
 DESCRIPTION
   Start generating your files
@@ -314,3 +311,13 @@ DESCRIPTION
   Update installed plugins.
 ```
 <!-- commandsstop -->
+
+# Todos
+<!-- todos -->
+- [ ] Optimize code: writeFile timing, logic, etc.
+- [ ] Add tests(btw: How to test a cli that results in some generated file ?)
+- [ ] Upgrade google-spredsheet to v4.
+- [ ] Change to Single Command CLI? (e.g. `ntsit` instead of `ntsit gen`).
+- [ ] Polish README.md: add demo gif, googlesheet template, tutorial for GCP(Google Cloud Platform) Authentication, etc.
+- [ ] Beautify console output: spinner, color, etc.
+<!-- todosstop -->

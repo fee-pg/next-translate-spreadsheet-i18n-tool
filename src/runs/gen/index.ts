@@ -1,5 +1,4 @@
-import {GoogleSpreadsheet, GoogleSpreadsheetWorksheet} from 'google-spreadsheet' // version: ^3.3.0
-import credentials from './gs_credentials'
+import {GoogleSpreadsheet, GoogleSpreadsheetWorksheet, ServiceAccountCredentials} from 'google-spreadsheet' // version: ^3.3.0
 import fs from 'node:fs'
 import path from 'node:path'
 
@@ -19,16 +18,14 @@ const compose = (...fns: { (str: string): string; (str: string): string }[]) => 
   }
 }
 
-const validCredentials = (credentials: Record<string, string>) => {
-  const {private_key, client_email} = credentials
-  if (private_key === 'YOUR_PRIVATE_KEY' || client_email === 'YOUR_CLIENT_EMAIL') {
-    throw new Error('Please set your credentials in src/runs/gen/gs_credentials.ts')
-  }
-}
-
-const sheetInit = async (sheetId: string, sheetIndex: number) => {
+const sheetInit = async (sheetId: string, sheetIndex: number, credentials: ServiceAccountCredentials) => {
   const doc = new GoogleSpreadsheet(sheetId)
-  await doc.useServiceAccountAuth(credentials)
+  try {
+    await doc.useServiceAccountAuth(credentials)
+  } catch (error) {
+    console.log('auth-error:', error)
+  }
+
   await doc.loadInfo()
   const sheet = doc.sheetsByIndex[sheetIndex]
   await sheet.loadCells()
@@ -78,28 +75,29 @@ const getKeys = async (sheet: GoogleSpreadsheetWorksheet, cell: {x: number, y: n
   return keys
 }
 
-/**
- *
- * @param {string} sheetId google sheet id
- * @param {number[]} sheetIndexs google worksheet index
- * @param {{x: number, y: number}} hStartCell horizontal start cell
- * @param {{x: number, y: number}} vStartCell vertical start cell
- * @returns {Promise<void>} void
- */
-const main = async (
+type MainArgs = {
   sheetId: string,
   sheetIndexs: number[],
-  hStartCell:{x: number, y: number},
-  vStartCell:{x: number, y: number},
-): Promise<void> => {
-  validCredentials(credentials)
-
+  hStartCell: {x: number, y: number},
+  vStartCell: {x: number, y: number},
+  credentialsPath: string
+}
+const main = async ({
+  sheetId,
+  sheetIndexs,
+  hStartCell,
+  vStartCell,
+  credentialsPath,
+}: MainArgs): Promise<void> => {
   const localesJsonMap: Record<string,  Record<string, string>> = {}
-  const firstSheet = await sheetInit(sheetId, sheetIndexs[0])
+  const resultPath = path.join(process.cwd(), credentialsPath)
+  console.log('resultPath:', resultPath)
+  const credentials = JSON.parse(fs.readFileSync(resultPath, 'utf-8'))
+  const firstSheet = await sheetInit(sheetId, sheetIndexs[0], credentials)
   const locales = await getLocales(firstSheet, hStartCell)
 
   sheetIndexs.forEach(async sheetIndex => {
-    const sheet = await sheetInit(sheetId, sheetIndex)
+    const sheet = await sheetInit(sheetId, sheetIndex, credentials)
     const keys = await getKeys(sheet, vStartCell)
 
     for (let i = 0; i < locales.length; i++) {
