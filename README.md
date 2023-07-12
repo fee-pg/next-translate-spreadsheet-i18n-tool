@@ -8,6 +8,7 @@ a next-translate's tool for google spreadsheet, it can flatten 2D locale-key arr
 
 <!-- toc -->
 * [Usage](#usage)
+* [Tutorial](#tutorial)
 * [Commands](#commands)
 * [Todos](#todos)
 <!-- tocstop -->
@@ -18,13 +19,35 @@ $ npm install -g @uppo/next-translate-spreadsheet-i18n-tool
 $ ntsit COMMAND
 running command...
 $ ntsit (--version)
-@uppo/next-translate-spreadsheet-i18n-tool/1.1.1 darwin-x64 node-v16.14.2
+@uppo/next-translate-spreadsheet-i18n-tool/1.1.2 darwin-x64 node-v16.14.2
 $ ntsit --help [COMMAND]
 USAGE
   $ ntsit COMMAND
 ...
 ```
 <!-- usagestop -->
+# Tutorial
+<!-- tutorial -->
+## 1. Prepare your spreadsheet
+demo template: https://docs.google.com/spreadsheets/d/1mBFh5E2LzF66hV4bw-pVyCA0CvvqBJrk9-A8XntbG64/edit?usp=sharing
+
+## 2. GCP setup
+> reference: [google cloud platform](https://developers.google.com/workspace/guides/manage-credentials?hl=zh-cn)
+1. create a project([link](https://console.cloud.google.com/welcome?organizationId=0&supportedpurview=project))
+2. enable google sheets api
+3. create a service account
+4. download the crediential json file
+5. share your spreadsheet to the service account email
+
+## 3. Run the command
+```sh-session
+$ ntsit gen
+```
+
+## 4. Get your sheet id
+e.g. https://docs.google.com/spreadsheets/d/[spreadsheetId]/edit#gid=0
+
+<!-- tutorialstop -->
 # Commands
 <!-- commands -->
 * [`ntsit gen`](#ntsit-gen)
@@ -51,7 +74,7 @@ DESCRIPTION
   Start generating your files
 ```
 
-_See code: [dist/commands/gen/index.ts](https://github.com/fee-pg/next-translate-spreadsheet-i18n-tool/blob/v1.1.1/dist/commands/gen/index.ts)_
+_See code: [dist/commands/gen/index.ts](https://github.com/fee-pg/next-translate-spreadsheet-i18n-tool/blob/v1.1.2/dist/commands/gen/index.ts)_
 
 ## `ntsit help [COMMANDS]`
 
@@ -312,7 +335,5 @@ DESCRIPTION
 - [ ] Optimize code: writeFile timing, logic, etc.
 - [ ] Add tests(btw: How to test a cli that results in some generated file ?)
 - [ ] Upgrade google-spredsheet to v4.
-- [ ] Change to Single Command CLI? (e.g. `ntsit` instead of `ntsit gen`).
-- [ ] Polish README.md: add demo gif, googlesheet template, tutorial for GCP(Google Cloud Platform) Authentication, etc.
 - [ ] Beautify console output: spinner, color, etc.
 <!-- todosstop -->

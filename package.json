@@ -1,6 +1,6 @@
 {
   "name": "@uppo/next-translate-spreadsheet-i18n-tool",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "a next-translate's tool for google spreadsheet, it can flatten 2D locale-key array to multi 1D JSON.",
   "author": "fee-pg",
   "bin": {
