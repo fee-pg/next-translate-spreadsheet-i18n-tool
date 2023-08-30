@@ -68,7 +68,7 @@ const getKeys = async (sheet: GoogleSpreadsheetWorksheet, cell: {x: number, y: n
       break
     }
 
-    keys.push(cellValue)
+    keys.push(trim(cellValue))
     _currentRow++
   }
 

@@ -27,8 +27,12 @@ export default class Gen extends Command {
   async run(): Promise<void> {
     const sheetId = await ux.prompt('google spreadsheet id?')
     const workSheets = await ux.prompt('google spreadsheet worksheet id? count or indexs(e.g. 3 or 0,1,2)')
-    const hStartCell = await ux.prompt('horizontal start cell?(e.g. C1)')
-    const vStartCell = await ux.prompt('vertical start cell?(e.g. B3)')
+    const hStartCell = await ux.prompt('horizontal start cell?(e.g. C1)', {
+      default: 'C1',
+    })
+    const vStartCell = await ux.prompt('vertical start cell?(e.g. B3)', {
+      default: 'B3',
+    })
     const credentialsPath = await ux.prompt('google credentials path? based on the current directory, use relative path')
 
     await main({

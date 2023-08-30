@@ -19,7 +19,7 @@ $ npm install -g @uppo/next-translate-spreadsheet-i18n-tool
 $ ntsit COMMAND
 running command...
 $ ntsit (--version)
-@uppo/next-translate-spreadsheet-i18n-tool/1.1.2 darwin-x64 node-v16.14.2
+@uppo/next-translate-spreadsheet-i18n-tool/1.1.3 darwin-x64 node-v16.14.2
 $ ntsit --help [COMMAND]
 USAGE
   $ ntsit COMMAND
@@ -74,7 +74,7 @@ DESCRIPTION
   Start generating your files
 ```
 
-_See code: [dist/commands/gen/index.ts](https://github.com/fee-pg/next-translate-spreadsheet-i18n-tool/blob/v1.1.2/dist/commands/gen/index.ts)_
+_See code: [dist/commands/gen/index.ts](https://github.com/fee-pg/next-translate-spreadsheet-i18n-tool/blob/v1.1.3/dist/commands/gen/index.ts)_
 
 ## `ntsit help [COMMANDS]`
 
